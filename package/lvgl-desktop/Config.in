@@ -1,0 +1,5 @@
+config BR2_PACKAGE_LVGL_DESKTOP
+	bool "lvgl desktop"
+	depends on BR2_PACKAGE_DBUS
+	help
+	  This is the 100ASK Lvgl GUI DESKTOP.

@@ -1,0 +1,58 @@
+name: Auto Build DSP7 system.
+
+on:
+  push:
+    tags:
+       - '*'
+       
+jobs:
+  build-all:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        config: [dongshanpiseven_core_defconfig, dongshanpiseven_standard-lvgl_defconfig, dongshanpiseven_standard-aiot_defconfig, dongshanpiseven_full-qt_defconfig ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: buildroot-external-dongshanpiseven
+      
+      - uses: actions/checkout@v2
+        with:
+          repository: bootlin/buildroot
+          ref: st/2021.02
+          path: buildroot
+          
+      - name: Install buildroot dependencies
+        run: sudo apt install debianutils sed make binutils build-essential gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc git mtools
+        
+      - name: Configure Buildroot
+        run: make -C buildroot BR2_EXTERNAL=../buildroot-external-dongshanpiseven O=../output ${{ matrix.config }}
+        
+      - name: Build Buildroot
+        run: make -C buildroot BR2_EXTERNAL=../buildroot-external-dongshanpiseven O=../output
+        
+      - name: Build toolchain
+        run: make -C buildroot BR2_EXTERNAL=../buildroot-external-dongshanpiseven O=../output sdk        
+        
+      - name: Compress sdcard.img
+        run: gzip -9 output/images/sdcard.img
+                 
+      - run: tar -czvf ${{ matrix.config }}.tar.gz   output/images/*         
+
+      - name: Store images
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.config }}
+          path: ${{ matrix.config }}.tar.gz
+          
+      - run: ls -la
+      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            ${{ matrix.config }}.tar.gz
+            
+      - run: ls -la            
+          

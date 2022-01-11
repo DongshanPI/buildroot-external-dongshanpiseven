@@ -1,0 +1,11 @@
+[Unit]
+Description=myir hmi v2.0
+After=sshd.service
+
+[Service]
+Type=forking
+ExecStart=/bin/sh /usr/bin/start.sh start
+
+[Install]
+WantedBy=multi-user.target
+Alias=myir.service

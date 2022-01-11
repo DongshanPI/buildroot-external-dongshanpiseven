@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# Start lvgl....
+#
+
+
+start() {
+	printf "Starting 100ask lvgl: "
+	echo -n -e '\e[?17;14;224c'
+	echo 0 > /sys/class/graphics/fbcon/cursor_blink
+	start-stop-daemon -S -q -m -b -p /var/run/lvgl.pid \
+			-x /usr/share/lvgl/lvgl_100ask_demo
+      [ $? = 0 ] && echo "OK" || echo "FAIL"
+}
+
+stop() {
+	printf "Stopping lvgl: "
+	start-stop-daemon -K -q -p /var/run/lvgl.pid \
+			  -x /usr/share/lvgl/lvgl_100ask_demo
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+}
+
+case "$1" in
+    start)
+	start
+	;;
+    stop)
+	stop
+	;;
+    restart|reload)
+	stop
+	start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

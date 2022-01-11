@@ -1,0 +1,7 @@
+config BR2_PACKAGE_MYIR_HMI_GUI
+	bool "myir-hmi-gui"
+	depends on BR2_PACKAGE_QT5
+	select BR2_PACKAGE_QT5BASE_WIDGETS
+	select BR2_PACKAGE_QT5CHARTS
+	help
+	  This is the MYIR QT HMI V2.0 GUI DESKTOP.

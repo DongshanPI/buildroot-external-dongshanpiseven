@@ -1,0 +1,3 @@
+source "$BR2_EXTERNAL_ST_PATH/package/m4projects/Config.in"
+source "$BR2_EXTERNAL_ST_PATH/package/lvgl-desktop/Config.in"
+source "$BR2_EXTERNAL_ST_PATH/package/myir-hmi-gui/Config.in"
