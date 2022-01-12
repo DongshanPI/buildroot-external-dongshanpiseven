@@ -1,0 +1,4 @@
+#Opt	Id	Name	Type	IP	Offset	Binary
+-	0x01	fsbl1-boot	Binary	none	0x0	Ram/tf-a-stm32mp157c-100ask-512d-v1-serialboot.stm32
+-	0x03	ssbl-boot	Binary	none	0x0	Ram/u-boot.stm32
+P	0x10	sdcard	RawImage	mmc0	0x0	100ask-stm32mp157-pro-512d-v1-tfa.img
