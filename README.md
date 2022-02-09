@@ -98,7 +98,7 @@
 但是你需要安装一些必要软件包至您的Linux工作站才可以使用[Buildroot manual System requirements section](https://buildroot.org/downloads/manual/manual.html#requirement). 对于 Debian/Ubuntu发行版系统，需要参考下述命令安装列出来的软件包。
 
 ```bash
-$ sudo apt install debianutils sed make binutils build-essential gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc git
+$ sudo apt install debianutils sed make binutils build-essential gcc g++ bash patch gzip bzip2 perl tar cpio unzip rsync file bc git libssl-dev
 ```
 
 ### 获取代码
@@ -137,10 +137,10 @@ $ git clone -b main https://github.com/DongshanPI/buildroot-external-dongshanpis
 $ cd buildroot/
 ```
 
- 接下来执行配置命令，来使用 `dongshanpiserven_core_defconfig`配置文件进行配置。
+ 接下来执行配置命令，来使用 `dongshanpiseven_core_defconfig`配置文件进行配置。
 
 ```bash
-buildrot/ $ make BR2_EXTERNAL=../buildroot-external-dongshanpiseven dongshanpiserven_core_defconfig
+buildroot/ $ make BR2_EXTERNAL=../buildroot-external-dongshanpiseven dongshanpiseven_core_defconfig
 ```
 
  指定配置文件后，可以使用 `make menuconfig` 命令来增加自己需要的包。
