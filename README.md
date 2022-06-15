@@ -111,7 +111,7 @@ $ sudo apt install debianutils sed make binutils build-essential gcc g++ bash pa
   
 
 ```bash
-$ git clone https://github.com/DongshanPI/Buildroot-ST.git
+$ git clone https://github.com/DongshanPI/Buildroot-ST.git buildroot
 ```
 
 - 直接下载
